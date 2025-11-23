@@ -1,4 +1,5 @@
 import { useState } from "react";
+import EducationEditForm from "./EducationEditForm";
 
 function Education({ educationList, setEducationList }) {
   const [schoolName, setSchoolName] = useState("");
@@ -15,6 +16,7 @@ function Education({ educationList, setEducationList }) {
       titleOfStudy,
       startYearOfStudy,
       endYearOfStudy,
+      isEditing: false,
     };
 
     setEducationList([...educationList, newEntry]);
@@ -23,6 +25,36 @@ function Education({ educationList, setEducationList }) {
     setTitleOfStudy("");
     setStartYearOfStudy("");
     setEndYearOfStudy("");
+  };
+
+  const handleDelete = (idToDelete) => {
+    setEducationList(educationList.filter((education) => education.id !== idToDelete));
+  };
+
+  const handleEdit = (idToEdit) => {
+    setEducationList(
+      educationList.map((education) =>
+        education.id === idToEdit
+          ? { ...education, isEditing: true }
+          : { ...education, isEditing: false }
+      )
+    );
+  };
+
+  const handleSave = (idToSave, updatedData) => {
+    setEducationList(
+      educationList.map((education) =>
+        education.id === idToSave ? { ...updatedData, id: idToSave, isEditing: false } : education
+      )
+    );
+  };
+
+  const handleCancel = (idToCancel) => {
+    setEducationList(
+      educationList.map((education) =>
+        education.id === idToCancel ? { ...education, isEditing: false } : education
+      )
+    );
   };
 
   return (
@@ -95,18 +127,30 @@ function Education({ educationList, setEducationList }) {
         ) : (
           educationList.map((education) => (
             <div key={education.id} className="education-entry">
-              <p>
-                <strong>School Name: </strong> {education.schoolName}
-              </p>
-              <p>
-                <strong>Title Of Study: </strong> {education.titleOfStudy}
-              </p>
-              <p>
-                <strong>Start Year: </strong> {education.startYearOfStudy}
-              </p>
-              <p>
-                <strong>End Year: </strong> {education.endYearOfStudy}
-              </p>
+              {education.isEditing ? (
+                <EducationEditForm
+                  education={education}
+                  onSave={handleSave}
+                  onCancel={handleCancel}
+                />
+              ) : (
+                <>
+                  <p>
+                    <strong>School Name: </strong> {education.schoolName}
+                  </p>
+                  <p>
+                    <strong>Title Of Study: </strong> {education.titleOfStudy}
+                  </p>
+                  <p>
+                    <strong>Start Year: </strong> {education.startYearOfStudy}
+                  </p>
+                  <p>
+                    <strong>End Year: </strong> {education.endYearOfStudy}
+                  </p>
+                  <button onClick={() => handleEdit(education.id)}>Edit</button>
+                  <button onClick={() => handleDelete(education.id)}>Delete</button>
+                </>
+              )}
             </div>
           ))
         )}
