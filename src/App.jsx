@@ -3,6 +3,7 @@ import "./App.css";
 import GeneralInfo from "./components/GeneralInfo";
 import Education from "./components/Education";
 import Experience from "./components/Experience";
+import CVPreview from "./components/CVPreview";
 
 function App() {
   const [educationList, setEducationList] = useState([]);
@@ -11,9 +12,17 @@ function App() {
   return (
     <div className="app">
       <h1>CV Application</h1>
-      <GeneralInfo />
-      <Education educationList={educationList} setEducationList={setEducationList} />
-      <Experience experienceList={experienceList} setExperienceList={setExperienceList} />
+
+      <div className="app-container">
+        <div className="editor-section">
+          <GeneralInfo />
+          <Education educationList={educationList} setEducationList={setEducationList} />
+          <Experience experienceList={experienceList} setExperienceList={setExperienceList} />
+        </div>
+        <div className="preview-section">
+          <CVPreview educationList={educationList} experienceList={experienceList} />
+        </div>
+      </div>
     </div>
   );
 }
