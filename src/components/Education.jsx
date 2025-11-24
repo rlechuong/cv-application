@@ -4,8 +4,8 @@ import EducationEditForm from "./EducationEditForm";
 function Education({ educationList, setEducationList }) {
   const [schoolName, setSchoolName] = useState("");
   const [titleOfStudy, setTitleOfStudy] = useState("");
-  const [startYearOfStudy, setStartYearOfStudy] = useState("");
-  const [endYearOfStudy, setEndYearOfStudy] = useState("");
+  const [startYear, setStartYear] = useState("");
+  const [endYear, setEndYear] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,8 +14,8 @@ function Education({ educationList, setEducationList }) {
       id: crypto.randomUUID(),
       schoolName,
       titleOfStudy,
-      startYearOfStudy,
-      endYearOfStudy,
+      startYear,
+      endYear,
       isEditing: false,
     };
 
@@ -23,8 +23,8 @@ function Education({ educationList, setEducationList }) {
 
     setSchoolName("");
     setTitleOfStudy("");
-    setStartYearOfStudy("");
-    setEndYearOfStudy("");
+    setStartYear("");
+    setEndYear("");
   };
 
   const handleDelete = (idToDelete) => {
@@ -62,7 +62,7 @@ function Education({ educationList, setEducationList }) {
       <h2>Educational Experience</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="schoolName">School Name:</label>
+          <label htmlFor="schoolName">School Name: </label>
           <input
             type="text"
             id="schoolName"
@@ -74,7 +74,7 @@ function Education({ educationList, setEducationList }) {
         </div>
 
         <div>
-          <label htmlFor="titleOfStudy">Title Of Study:</label>
+          <label htmlFor="titleOfStudy">Title Of Study: </label>
           <input
             type="text"
             id="titleOfStudy"
@@ -86,38 +86,38 @@ function Education({ educationList, setEducationList }) {
         </div>
 
         <div>
-          <label htmlFor="startYearOfStudy">Start Year Of Study:</label>
+          <label htmlFor="startYear">Start Year: </label>
           <input
             type="number"
-            id="startYearOfStudy"
-            name="startYearOfStudy"
+            id="startYear"
+            name="startYear"
             min="1900"
             max="2100"
             step="1"
             placeholder="YYYY"
-            value={startYearOfStudy}
-            onChange={(e) => setStartYearOfStudy(e.target.value)}
+            value={startYear}
+            onChange={(e) => setStartYear(e.target.value)}
             required
           />
         </div>
 
         <div>
-          <label htmlFor="endYearOfStudy">End Year Of Study:</label>
+          <label htmlFor="endYear">End Year: </label>
           <input
             type="number"
-            id="endYearOfStudy"
-            name="endYearOfStudy"
+            id="endYear"
+            name="endYear"
             min="1900"
             max="2100"
             step="1"
             placeholder="YYYY"
-            value={endYearOfStudy}
-            onChange={(e) => setEndYearOfStudy(e.target.value)}
+            value={endYear}
+            onChange={(e) => setEndYear(e.target.value)}
             required
           />
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Add</button>
       </form>
 
       <div className="education-list">
@@ -142,10 +142,10 @@ function Education({ educationList, setEducationList }) {
                     <strong>Title Of Study: </strong> {education.titleOfStudy}
                   </p>
                   <p>
-                    <strong>Start Year: </strong> {education.startYearOfStudy}
+                    <strong>Start Year: </strong> {education.startYear}
                   </p>
                   <p>
-                    <strong>End Year: </strong> {education.endYearOfStudy}
+                    <strong>End Year: </strong> {education.endYear}
                   </p>
                   <button onClick={() => handleEdit(education.id)}>Edit</button>
                   <button onClick={() => handleDelete(education.id)}>Delete</button>

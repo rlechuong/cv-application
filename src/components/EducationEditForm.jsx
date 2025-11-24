@@ -3,13 +3,13 @@ import { useState } from "react";
 function EducationEditForm({ education, onSave, onCancel }) {
   const [schoolName, setSchoolName] = useState(education.schoolName);
   const [titleOfStudy, setTitleOfStudy] = useState(education.titleOfStudy);
-  const [startYearOfStudy, setStartYearOfStudy] = useState(education.startYearOfStudy);
-  const [endYearOfStudy, setEndYearOfStudy] = useState(education.endYearOfStudy);
+  const [startYear, setStartYear] = useState(education.startYear);
+  const [endYear, setEndYear] = useState(education.endYear);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const updatedEducation = { schoolName, titleOfStudy, startYearOfStudy, endYearOfStudy };
+    const updatedEducation = { schoolName, titleOfStudy, startYear, endYear };
 
     onSave(education.id, updatedEducation);
   };
@@ -41,33 +41,33 @@ function EducationEditForm({ education, onSave, onCancel }) {
       </div>
 
       <div>
-        <label htmlFor="startYearOfStudy">Start Year Of Study:</label>
+        <label htmlFor="startYear">Start Year:</label>
         <input
           type="number"
-          id="startYearOfStudy"
-          name="startYearOfStudy"
+          id="startYear"
+          name="startYear"
           min="1900"
           max="2100"
           step="1"
           placeholder="YYYY"
-          value={startYearOfStudy}
-          onChange={(e) => setStartYearOfStudy(e.target.value)}
+          value={startYear}
+          onChange={(e) => setStartYear(e.target.value)}
           required
         />
       </div>
 
       <div>
-        <label htmlFor="endYearOfStudy">End Year Of Study:</label>
+        <label htmlFor="endYear">End Year:</label>
         <input
           type="number"
-          id="endYearOfStudy"
-          name="endYearOfStudy"
+          id="endYear"
+          name="endYear"
           min="1900"
           max="2100"
           step="1"
           placeholder="YYYY"
-          value={endYearOfStudy}
-          onChange={(e) => setEndYearOfStudy(e.target.value)}
+          value={endYear}
+          onChange={(e) => setEndYear(e.target.value)}
           required
         />
       </div>

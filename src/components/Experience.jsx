@@ -161,7 +161,7 @@ function Experience({ experienceList, setExperienceList }) {
           </label>
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Add</button>
       </form>
 
       <div>
