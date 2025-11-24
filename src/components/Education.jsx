@@ -28,7 +28,9 @@ function Education({ educationList, setEducationList }) {
   };
 
   const handleDelete = (idToDelete) => {
-    setEducationList(educationList.filter((education) => education.id !== idToDelete));
+    if (window.confirm("Are you sure you want to delete this education entry?")) {
+      setEducationList(educationList.filter((education) => education.id !== idToDelete));
+    }
   };
 
   const handleEdit = (idToEdit) => {
@@ -123,7 +125,9 @@ function Education({ educationList, setEducationList }) {
       <div className="education-list">
         <h3>Added Education</h3>
         {educationList.length === 0 ? (
-          <p>No Education Added.</p>
+          <p className="empty-state">
+            No Education Added. Fill out the form above to add your first education!
+          </p>
         ) : (
           educationList.map((education) => (
             <div key={education.id} className="education-entry">

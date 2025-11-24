@@ -34,7 +34,9 @@ function Experience({ experienceList, setExperienceList }) {
   };
 
   const handleDelete = (idToDelete) => {
-    setExperienceList(experienceList.filter((experience) => experience.id !== idToDelete));
+    if (window.confirm("Are you sure you want to delete this experience entry?")) {
+      setExperienceList(experienceList.filter((experience) => experience.id !== idToDelete));
+    }
   };
 
   const handleEdit = (idToEdit) => {
@@ -164,11 +166,12 @@ function Experience({ experienceList, setExperienceList }) {
         <button type="submit">Add</button>
       </form>
 
-      <div>
+      <div className="experience-list">
         <h3>Added Experience</h3>
-
         {experienceList.length === 0 ? (
-          <p>No Experience Added</p>
+          <p className="empty-state">
+            No Experience Added. Fill out the form above to add your first experience!
+          </p>
         ) : (
           experienceList.map((experience) => (
             <div key={experience.id} className="experience-entry">
