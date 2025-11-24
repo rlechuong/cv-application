@@ -1,4 +1,4 @@
-function CVPreview({ educationList, experienceList }) {
+function CVPreview({ generalInfo, educationList, experienceList }) {
   const formatDate = (dateString) => {
     if (!dateString) return "";
     const [year, month] = dateString.split("-");
@@ -25,8 +25,15 @@ function CVPreview({ educationList, experienceList }) {
 
       {/* General Information Section */}
       <div className="preview-general-info">
-        <h3>General Information</h3>
-        <p>TO DO</p>
+        {generalInfo.firstName && (
+          <>
+            <h3>
+              {generalInfo.firstName} {generalInfo.lastName}
+            </h3>
+            {generalInfo.email && <p>{generalInfo.email}</p>}
+            {generalInfo.phone && <p>{generalInfo.phone}</p>}
+          </>
+        )}
       </div>
 
       {/* Education Section */}

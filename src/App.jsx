@@ -6,6 +6,13 @@ import Experience from "./components/Experience";
 import CVPreview from "./components/CVPreview";
 
 function App() {
+  const [generalInfo, setGeneralInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    isEditing: true,
+  });
   const [educationList, setEducationList] = useState([]);
   const [experienceList, setExperienceList] = useState([]);
 
@@ -15,12 +22,16 @@ function App() {
 
       <div className="app-container">
         <div className="editor-section">
-          <GeneralInfo />
+          <GeneralInfo generalInfo={generalInfo} setGeneralInfo={setGeneralInfo} />
           <Education educationList={educationList} setEducationList={setEducationList} />
           <Experience experienceList={experienceList} setExperienceList={setExperienceList} />
         </div>
         <div className="preview-section">
-          <CVPreview educationList={educationList} experienceList={experienceList} />
+          <CVPreview
+            generalInfo={generalInfo}
+            educationList={educationList}
+            experienceList={experienceList}
+          />
         </div>
       </div>
     </div>

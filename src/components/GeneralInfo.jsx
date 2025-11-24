@@ -1,30 +1,41 @@
 import { useState } from "react";
 
-function GeneralInfo() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [isEditing, setIsEditing] = useState(true);
+function GeneralInfo({ generalInfo, setGeneralInfo }) {
+  const [firstName, setFirstName] = useState(generalInfo.firstName);
+  const [lastName, setLastName] = useState(generalInfo.lastName);
+  const [email, setEmail] = useState(generalInfo.email);
+  const [phone, setPhone] = useState(generalInfo.phone);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`Form Submitted!`);
-    console.log(`Name: ${firstName} ${lastName}`);
-    console.log(`E-Mail: ${email}`);
-    console.log(`Phone: ${phone}`);
-    setIsEditing(false);
+    setGeneralInfo({ firstName, lastName, email, phone, isEditing: false });
   };
 
-  if (isEditing) {
+  const handleEdit = () => {
+    setFirstName(generalInfo.firstName);
+    setLastName(generalInfo.lastName);
+    setEmail(generalInfo.email);
+    setPhone(generalInfo.phone);
+
+    setGeneralInfo({ ...generalInfo, isEditing: true });
+  };
+
+  const handleCancel = () => {
+    setFirstName(generalInfo.firstName);
+    setLastName(generalInfo.lastName);
+    setEmail(generalInfo.email);
+    setPhone(generalInfo.phone);
+
+    setGeneralInfo({ ...generalInfo, isEditing: false });
+  };
+
+  if (generalInfo.isEditing) {
     return (
       <div>
         <h2>General Information</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="firstName">
-              <strong>First Name: </strong>
-            </label>
+            <label htmlFor="firstName">First Name:</label>
             <input
               type="text"
               id="firstName"
@@ -36,9 +47,7 @@ function GeneralInfo() {
           </div>
 
           <div>
-            <label htmlFor="lastName">
-              <strong>Last Name: </strong>
-            </label>
+            <label htmlFor="lastName">Last Name:</label>
             <input
               type="text"
               id="lastName"
@@ -50,9 +59,7 @@ function GeneralInfo() {
           </div>
 
           <div>
-            <label htmlFor="email">
-              <strong>E-Mail: </strong>
-            </label>
+            <label htmlFor="email">E-Mail:</label>
             <input
               type="email"
               id="email"
@@ -64,9 +71,7 @@ function GeneralInfo() {
           </div>
 
           <div>
-            <label htmlFor="phone">
-              <strong>Phone: </strong>
-            </label>
+            <label htmlFor="phone">Phone:</label>
             <input
               type="tel"
               id="phone"
@@ -77,7 +82,12 @@ function GeneralInfo() {
             />
           </div>
 
-          <button type="submit">Submit</button>
+          <button type="submit">Save</button>
+          {generalInfo.firstName && (
+            <button type="button" onClick={handleCancel}>
+              Cancel
+            </button>
+          )}
         </form>
       </div>
     );
@@ -88,15 +98,15 @@ function GeneralInfo() {
       <h2>General Information</h2>
       <div className="info-display">
         <p>
-          <strong>Name: </strong> {firstName} {lastName}
+          <strong>Name: </strong> {generalInfo.firstName} {generalInfo.lastName}
         </p>
         <p>
-          <strong>E-Mail: </strong> {email}
+          <strong>E-Mail: </strong> {generalInfo.email}
         </p>
         <p>
-          <strong>Phone: </strong> {phone}
+          <strong>Phone: </strong> {generalInfo.phone}
         </p>
-        <button onClick={() => setIsEditing(true)}>Edit</button>
+        <button onClick={handleEdit}>Edit</button>
       </div>
     </div>
   );
