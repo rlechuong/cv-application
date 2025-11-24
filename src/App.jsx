@@ -6,13 +6,14 @@ import Experience from "./components/Experience";
 
 function App() {
   const [educationList, setEducationList] = useState([]);
+  const [experienceList, setExperienceList] = useState([]);
 
   return (
     <div className="app">
       <h1>CV Application</h1>
       <GeneralInfo />
       <Education educationList={educationList} setEducationList={setEducationList} />
-      <Experience />
+      <Experience experienceList={experienceList} setExperienceList={setExperienceList} />
     </div>
   );
 }
