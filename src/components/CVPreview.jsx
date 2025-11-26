@@ -40,15 +40,17 @@ function CVPreview({ generalInfo, educationList, experienceList }) {
       <div className="preview-education">
         <h3>Education</h3>
         {educationList.length === 0 ? (
-          <p>No Education Added.</p>
+          <p className="empty-state">No Education Added.</p>
         ) : (
           educationList.map((education) => (
             <div key={education.id} className="preview-education-entry">
-              <h4>{education.schoolName}</h4>
-              <p>{education.titleOfStudy}</p>
-              <p>
-                {education.startYear} - {education.endYear}
-              </p>
+              <div className="entry-header">
+                <h4>{education.schoolName}</h4>
+                <span className="entry-date">
+                  {education.startYear} - {education.endYear}
+                </span>
+              </div>
+              <p className="entry-subtitle">{education.titleOfStudy}</p>
             </div>
           ))
         )}
@@ -58,19 +60,19 @@ function CVPreview({ generalInfo, educationList, experienceList }) {
       <div className="preview-experience">
         <h3>Experience</h3>
         {experienceList.length === 0 ? (
-          <p>No Experience Added.</p>
+          <p className="empty-state">No Experience Added.</p>
         ) : (
           experienceList.map((experience) => (
             <div key={experience.id} className="preview-experience-entry">
-              <h4>{experience.companyName}</h4>
-              <p>
-                <strong>{experience.positionTitle}</strong>
-              </p>
-              <p>{experience.mainResponsibilities}</p>
-              <p>
-                {formatDate(experience.startDate)} -{" "}
-                {experience.isCurrentJob ? "Present" : formatDate(experience.endDate)}
-              </p>
+              <div className="entry-header">
+                <h4>{experience.companyName}</h4>
+                <span className="entry-date">
+                  {formatDate(experience.startDate)} -{" "}
+                  {experience.isCurrentJob ? "Present" : formatDate(experience.endDate)}
+                </span>
+              </div>
+              <p className="entry-subtitle">{experience.positionTitle}</p>
+              <p className="entry-description">{experience.mainResponsibilities}</p>
             </div>
           ))
         )}

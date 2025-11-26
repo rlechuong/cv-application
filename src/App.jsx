@@ -18,10 +18,9 @@ function App() {
 
   return (
     <div className="app">
-      <h1>CV Application</h1>
-
       <div className="app-container">
         <div className="editor-section">
+          <h1>CV Editor</h1>
           <GeneralInfo generalInfo={generalInfo} setGeneralInfo={setGeneralInfo} />
           <Education educationList={educationList} setEducationList={setEducationList} />
           <Experience experienceList={experienceList} setExperienceList={setExperienceList} />
