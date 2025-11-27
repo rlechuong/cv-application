@@ -9,6 +9,8 @@ function Experience({ experienceList, setExperienceList }) {
   const [endDate, setEndDate] = useState("");
   const [isCurrentJob, setIsCurrentJob] = useState(false);
 
+  const [isAddingNew, setIsAddingNew] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -31,6 +33,8 @@ function Experience({ experienceList, setExperienceList }) {
     setStartDate("");
     setEndDate("");
     setIsCurrentJob(false);
+
+    setIsAddingNew(false);
   };
 
   const handleDelete = (idToDelete) => {
@@ -88,83 +92,93 @@ function Experience({ experienceList, setExperienceList }) {
   return (
     <div>
       <h2>Practical Experience</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="companyName">Company Name: </label>
-          <input
-            type="text"
-            id="companyName"
-            name="companyName"
-            value={companyName}
-            onChange={(e) => setCompanyName(e.target.value)}
-            required
-          />
-        </div>
 
-        <div>
-          <label htmlFor="positionTitle">Position Title: </label>
-          <input
-            type="text"
-            id="positionTitle"
-            name="positionTitle"
-            value={positionTitle}
-            onChange={(e) => setPositionTitle(e.target.value)}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="mainResponsibilities">Main Responsibilities: </label>
-          <textarea
-            id="mainResponsibilities"
-            name="mainResponsibilities"
-            rows="4"
-            className="main-responsibilities-input"
-            value={mainResponsibilities}
-            onChange={(e) => setMainResponsibilities(e.target.value)}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="startDate">Start Date: </label>
-          <input
-            type="month"
-            id="startDate"
-            name="startDate"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="endDate">End Date: </label>
-          <input
-            type="month"
-            id="endDate"
-            name="endDate"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            required={!isCurrentJob}
-            disabled={isCurrentJob}
-          />
-        </div>
-
-        <div>
-          <label>
+      {isAddingNew ? (
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="companyName">Company Name: </label>
             <input
-              type="checkbox"
-              name="isCurrentJob"
-              checked={isCurrentJob}
-              onChange={(e) => setIsCurrentJob(e.target.checked)}
+              type="text"
+              id="companyName"
+              name="companyName"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              required
             />
-            Currently Working Here
-          </label>
-        </div>
+          </div>
 
-        <button type="submit">Add</button>
-      </form>
+          <div>
+            <label htmlFor="positionTitle">Position Title: </label>
+            <input
+              type="text"
+              id="positionTitle"
+              name="positionTitle"
+              value={positionTitle}
+              onChange={(e) => setPositionTitle(e.target.value)}
+              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="mainResponsibilities">Main Responsibilities: </label>
+            <textarea
+              id="mainResponsibilities"
+              name="mainResponsibilities"
+              rows="4"
+              className="main-responsibilities-input"
+              value={mainResponsibilities}
+              onChange={(e) => setMainResponsibilities(e.target.value)}
+              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="startDate">Start Date: </label>
+            <input
+              type="month"
+              id="startDate"
+              name="startDate"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="endDate">End Date: </label>
+            <input
+              type="month"
+              id="endDate"
+              name="endDate"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              required={!isCurrentJob}
+              disabled={isCurrentJob}
+            />
+          </div>
+
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                name="isCurrentJob"
+                checked={isCurrentJob}
+                onChange={(e) => setIsCurrentJob(e.target.checked)}
+              />
+              Currently Working Here
+            </label>
+          </div>
+
+          <button type="submit">Add</button>
+          <button type="button" onClick={() => setIsAddingNew(false)}>
+            Cancel
+          </button>
+        </form>
+      ) : (
+        <button className="add-button" onClick={() => setIsAddingNew(true)}>
+          + Add Experience
+        </button>
+      )}
 
       <div className="experience-list">
         <h3>Added Experience</h3>

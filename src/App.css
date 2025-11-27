@@ -167,6 +167,45 @@ button:not([type="submit"]):hover {
   background-color: var(--color-surface-hover);
 }
 
+/* Add Button */
+
+button.add-button {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-1);
+  margin-bottom: var(--spacing-md);
+}
+
+.add-button:hover {
+  background-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-2);
+}
+
+/* Form Transitions */
+form {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Section Headings */
 h2 {
   color: var(--color-text-high);

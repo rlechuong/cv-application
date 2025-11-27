@@ -7,6 +7,8 @@ function Education({ educationList, setEducationList }) {
   const [startYear, setStartYear] = useState("");
   const [endYear, setEndYear] = useState("");
 
+  const [isAddingNew, setIsAddingNew] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -25,6 +27,8 @@ function Education({ educationList, setEducationList }) {
     setTitleOfStudy("");
     setStartYear("");
     setEndYear("");
+
+    setIsAddingNew(false);
   };
 
   const handleDelete = (idToDelete) => {
@@ -62,65 +66,74 @@ function Education({ educationList, setEducationList }) {
   return (
     <div>
       <h2>Educational Experience</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="schoolName">School Name: </label>
-          <input
-            type="text"
-            id="schoolName"
-            name="schoolName"
-            value={schoolName}
-            onChange={(e) => setSchoolName(e.target.value)}
-            required
-          />
-        </div>
 
-        <div>
-          <label htmlFor="titleOfStudy">Title Of Study: </label>
-          <input
-            type="text"
-            id="titleOfStudy"
-            name="titleOfStudy"
-            value={titleOfStudy}
-            onChange={(e) => setTitleOfStudy(e.target.value)}
-            required
-          />
-        </div>
+      {isAddingNew ? (
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="schoolName">School Name: </label>
+            <input
+              type="text"
+              id="schoolName"
+              name="schoolName"
+              value={schoolName}
+              onChange={(e) => setSchoolName(e.target.value)}
+              required
+            />
+          </div>
 
-        <div>
-          <label htmlFor="startYear">Start Year: </label>
-          <input
-            type="number"
-            id="startYear"
-            name="startYear"
-            min="1900"
-            max="2100"
-            step="1"
-            placeholder="YYYY"
-            value={startYear}
-            onChange={(e) => setStartYear(e.target.value)}
-            required
-          />
-        </div>
+          <div>
+            <label htmlFor="titleOfStudy">Title Of Study: </label>
+            <input
+              type="text"
+              id="titleOfStudy"
+              name="titleOfStudy"
+              value={titleOfStudy}
+              onChange={(e) => setTitleOfStudy(e.target.value)}
+              required
+            />
+          </div>
 
-        <div>
-          <label htmlFor="endYear">End Year: </label>
-          <input
-            type="number"
-            id="endYear"
-            name="endYear"
-            min="1900"
-            max="2100"
-            step="1"
-            placeholder="YYYY"
-            value={endYear}
-            onChange={(e) => setEndYear(e.target.value)}
-            required
-          />
-        </div>
+          <div>
+            <label htmlFor="startYear">Start Year: </label>
+            <input
+              type="number"
+              id="startYear"
+              name="startYear"
+              min="1900"
+              max="2100"
+              step="1"
+              placeholder="YYYY"
+              value={startYear}
+              onChange={(e) => setStartYear(e.target.value)}
+              required
+            />
+          </div>
 
-        <button type="submit">Add</button>
-      </form>
+          <div>
+            <label htmlFor="endYear">End Year: </label>
+            <input
+              type="number"
+              id="endYear"
+              name="endYear"
+              min="1900"
+              max="2100"
+              step="1"
+              placeholder="YYYY"
+              value={endYear}
+              onChange={(e) => setEndYear(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit">Add</button>
+          <button type="button" onClick={() => setIsAddingNew(false)}>
+            Cancel
+          </button>
+        </form>
+      ) : (
+        <button className="add-button" onClick={() => setIsAddingNew(true)}>
+          + Add Education
+        </button>
+      )}
 
       <div className="education-list">
         <h3>Added Education</h3>
